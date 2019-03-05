@@ -31,7 +31,7 @@ t_tetra	*create_ell(char ***elem)
 
 	if (!(new_tetra = (t_tetra*)malloc(sizeof(t_tetra))))
 	{
-		ft_putendl("ERROR in create ell");
+		ft_putendl("error");
 		return (NULL);
 	}
 	(*new_tetra).h = ft_clear_line(*elem);
@@ -46,7 +46,7 @@ t_tetra	*create_ell(char ***elem)
 ** if 5s string not 0 - return positive volume in the last string, return 0
 */
 
-int		getarray(int fd, char ***arr, t_tetra **lists, char ch)
+int		getarray(int fd, char ***arr, char ch)
 {
 	int			f;
 	int			i;
@@ -56,10 +56,10 @@ int		getarray(int fd, char ***arr, t_tetra **lists, char ch)
 	while (i < 4)
 	{
 		if (!get_next_line(fd, &((*arr)[i++])))
-			ft_putendl("error in getarrayGNL");
+			ft_putendl("error");
 	}
 	if (!ft_replace_and_check_valid_figure(&arr[0][0], ch))
-		ft_putendl("error in getarray");
+		ft_putendl("error");
 	f = get_next_line(fd, &((*arr)[i]));
 	(*arr)[i] = NULL;
 	return (f);
@@ -69,19 +69,19 @@ int		getarray(int fd, char ***arr, t_tetra **lists, char ch)
 ** get list and crate element
 */
 
-int		getlist(int fd, t_tetra **lists, t_tetra **list, char ch)
+int		getlist(int fd, t_tetra **list, char ch)
 {
 	int			i;
 	char		**arr;
 
 	arr = NULL;
 	i = 0;
-	i = getarray(fd, &arr, lists, ch);
+	i = getarray(fd, &arr, ch);
 	if (!lst_validation(arr, ch))
-		ft_putendl("error in getlist");
+		ft_putendl("error");
 	*list = create_ell(&arr);
 	if (!wh_validation((*list)->w, (*list)->h))
-		ft_putendl("error in getlist");
+		ft_putendl("error");
 	return (i);
 }
 
@@ -95,7 +95,7 @@ int		ft_create(int fd, t_tetra **lists)
 	char		ch;
 
 	ch = 'A';
-	while (getlist(fd, lists, &list, ch++))
+	while (getlist(fd, &list, ch++))
 		l_back_push(lists, list);
 	l_back_push(lists, list);
 	return (0);
@@ -113,6 +113,6 @@ int		ft_read(char *line, t_tetra **lists)
 	if (line && fd)
 		ft_create(fd, lists);
 	else
-		ft_putendl("Crash in ft_read");
+		ft_putendl("error");
 	return (0);
 }

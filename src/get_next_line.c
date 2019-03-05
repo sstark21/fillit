@@ -61,7 +61,6 @@ static int		snake(char **str, int fd)
 int				get_next_line(const int fd, char **line)
 {
 	static char		*str[1024];
-	char			*a;
 	int				i;
 
 	i = 1;
