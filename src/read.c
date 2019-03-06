@@ -56,10 +56,10 @@ int		getarray(int fd, char ***arr, char ch)
 	while (i < 4)
 	{
 		if (!get_next_line(fd, &((*arr)[i++])))
-			ft_putendl("error");
+			emergency_exit(lists);
 	}
 	if (!ft_replace_and_check_valid_figure(&arr[0][0], ch))
-		ft_putendl("error");
+		emergency_exit(lists);
 	f = get_next_line(fd, &((*arr)[i]));
 	(*arr)[i] = NULL;
 	return (f);
@@ -78,10 +78,10 @@ int		getlist(int fd, t_tetra **list, char ch)
 	i = 0;
 	i = getarray(fd, &arr, ch);
 	if (!lst_validation(arr, ch))
-		ft_putendl("error");
+		emergency_exit(lists);
 	*list = create_ell(&arr);
 	if (!wh_validation((*list)->w, (*list)->h))
-		ft_putendl("error");
+		emergency_exit(lists);
 	return (i);
 }
 

@@ -6,11 +6,11 @@
 /*   By: gorange- <gorange-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 21:20:28 by gorange-          #+#    #+#             */
-/*   Updated: 2019/01/12 16:59:40 by gorange-         ###   ########.fr       */
+/*   Updated: 2019/03/06 19:30:39 by gorange-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../includes/get_next_line.h"
 
 static int		ft_strlen_mod(char *ch)
 {
