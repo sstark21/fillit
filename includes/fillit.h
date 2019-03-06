@@ -56,7 +56,8 @@ int		solution(char **mtx, t_tetra *tetra, int x, int y, int sqr);
 */
 
 void	ft_clear_mtx(char **mtx);
-void	ft_clear_lists(t_tetra *lst);
+int		ft_clear_lists(t_tetra **lst);
 void	cleaner(char **mtx, t_tetra *lst);
+void 	emergency_exit(t_tetra **lists);
 
 #endif

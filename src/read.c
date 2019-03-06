@@ -46,7 +46,7 @@ t_tetra	*create_ell(char ***elem)
 ** if 5s string not 0 - return positive volume in the last string, return 0
 */
 
-int		getarray(int fd, char ***arr, char ch)
+int		getarray(int fd, char ***arr, t_tetra **lists, char ch)
 {
 	int			f;
 	int			i;
@@ -69,14 +69,14 @@ int		getarray(int fd, char ***arr, char ch)
 ** get list and crate element
 */
 
-int		getlist(int fd, t_tetra **list, char ch)
+int		getlist(int fd, t_tetra **lists, t_tetra **list, char ch)
 {
 	int			i;
 	char		**arr;
 
 	arr = NULL;
 	i = 0;
-	i = getarray(fd, &arr, ch);
+	i = getarray(fd, &arr, lists, ch);
 	if (!lst_validation(arr, ch))
 		emergency_exit(lists);
 	*list = create_ell(&arr);
@@ -95,7 +95,7 @@ int		ft_create(int fd, t_tetra **lists)
 	char		ch;
 
 	ch = 'A';
-	while (getlist(fd, &list, ch++))
+	while (getlist(fd, lists, &list, ch++))
 		l_back_push(lists, list);
 	l_back_push(lists, list);
 	return (0);

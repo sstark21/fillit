@@ -59,6 +59,6 @@ int		ft_clear_lists(t_tetra **lst)
 void emergency_exit(t_tetra **lists)
 {
 	ft_clear_lists(lists);
-	ft_putendl("ERRROR !11!11ERROO!");
+	ft_putendl("error");
 	exit(0);
 }
