@@ -83,6 +83,7 @@ int	ft_replace_and_check_valid_figure(char **mx, char ch)
 	if (dots != 12 || sharps != 4)
 	{
 		ft_putendl("error");
+		exit (0);
 		return (0);
 	}
 	return (1);
