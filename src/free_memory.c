@@ -36,3 +36,23 @@ void	ft_clear_mtx(char **mtx)
 	}
 	ft_strdel(mtx);
 }
+
+int		ft_clear_lists(t_tetra *lst)
+{
+	if (lst == NULL)
+		return (1);
+	ft_clear_mtx(lst->tetraminka);
+	free(lst->tetraminka);
+	lst->tetraminka = NULL;
+	(void*)lst->w;
+    free(lst->w);
+
+	free(lst->h);
+
+	ft_clear_lists(lst->next);
+	free(lst->next);
+	lst->next = NULL;
+	free(lst);
+	lst = NULL;
+	return (0);
+}
