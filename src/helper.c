@@ -58,16 +58,3 @@ char	**ft_create_map(int sqr)
 	mx[x] = NULL;
 	return (mx);
 }
-
-void	ft_clear_mrx(char **mtx)
-{
-	int		n;
-
-	n = 0;
-	while (mtx)
-	{
-		ft_strdel(&mtx[n]);
-		n++;
-	}
-	ft_strdel(mtx);
-}

@@ -50,6 +50,13 @@ int		check_space(char **mtx, t_tetra *tetra, int x, int y);
 int		put_tetra(char **mtx, t_tetra *tetra, int x, int y);
 int		dell_tetra(char **mtx, t_tetra *tetra, int x, int y);
 int		solution(char **mtx, t_tetra *tetra, int x, int y, int sqr);
-void	ft_clear_mrx(char **mtx);
+
+/*
+** Memory cleaner
+*/
+
+void	ft_clear_mtx(char **mtx);
+void	ft_clear_lists(t_tetra *lst);
+void	cleaner(char **mtx, t_tetra *lst);
 
 #endif

@@ -20,7 +20,7 @@ char	**ft_solve(char *line)
 	map = ft_create_map(sh);
 	while (!solution(map, lists, 0, 0, sh))
 	{
-		ft_clear_mrx(map);
+		ft_clear_mtx(map);
 		map = ft_create_map(++sh);
 	}
 	return (map);
