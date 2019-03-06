@@ -56,7 +56,7 @@ int		getarray(int fd, char ***arr, t_tetra **lists, char ch)
 	while (i < 4)
 	{
 		if (!get_next_line(fd, &((*arr)[i++])))
-			emergency_exit(lists);
+		 	emergency_exit(lists);
 	}
 	if (!ft_replace_and_check_valid_figure(&arr[0][0], ch))
 		emergency_exit(lists);

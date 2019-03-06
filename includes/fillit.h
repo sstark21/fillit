@@ -1,5 +1,6 @@
 #ifndef FILLIT_H
 # define FILLIT_H
+# define DEB printf("Checking string %d in function: %s\n", __LINE__, __FILE__)
 
 # include "libft.h"
 # include <fcntl.h>

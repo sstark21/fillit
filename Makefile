@@ -7,6 +7,7 @@ SRC = main.c\
 	  solution.c\
 	  validation.c\
 	  get_next_line.c\
+	  free_memory.c\
 
 OBJ = $(SRC:.c=.o)
 

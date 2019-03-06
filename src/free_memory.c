@@ -1,6 +1,6 @@
 #include "../includes/fillit.h"
 #include "../includes/libft.h"
-
+#include <stdio.h>
 // void	cleaner(char **mtx, t_tetra *lst)
 // {
 // 	ft_clear_lists(lst);
@@ -29,35 +29,39 @@ void	ft_clear_mtx(char **mtx)
 	int		n;
 
 	n = 0;
-	while (mtx)
+	
+	while (mtx[n])
 	{
-		ft_strdel(&mtx[n]);
+		free(mtx[n]);
 		n++;
 	}
-	ft_strdel(mtx);
+	free(mtx);
+	mtx = NULL;
 }
 
 int		ft_clear_lists(t_tetra **lst)
 {
-	t_tetra *tmp;
-	tmp = *lst;
-	if (tmp == NULL)
-		return (1);
-	ft_clear_mtx(tmp->tetraminka);
-	free(tmp->tetraminka);
-	tmp->tetraminka = NULL;
-	(void)tmp->w;
-	(void)tmp->h;
-	ft_clear_lists(((t_tetra**)(tmp->next)));
-	free(tmp->next);
-	tmp->next = NULL;
-	free(tmp);
-	tmp = NULL;
+	DEB;
+	if ((*lst))
+		ft_clear_lists(&(*lst)->next);
+	DEB;
+	
+	ft_clear_mtx((*lst)->tetraminka);
+	DEB;
+	free((*lst)->tetraminka);
+	(*lst)->tetraminka = NULL;
+	(void)(*lst)->w;
+	(void)(*lst)->h;
+	free((*lst)->next);
+	(*lst)->next = NULL;
+	free((*lst));
+	(*lst) = NULL;
 	return (0);
 }
 
 void emergency_exit(t_tetra **lists)
 {
+	DEB;
 	ft_clear_lists(lists);
 	ft_putendl("error");
 	exit(0);
