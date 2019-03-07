@@ -62,7 +62,6 @@ int	ft_replace_and_check_valid_figure(char **mx, char ch)
 	dots = 0;
 	while (x < 4)
 	{
-		DEB;
 		if (ft_strlen(mx[x]) != 4 || ((!mx[x + 1]) && (x + 1 < 4)))
 			return (0);
 		y = 0;
@@ -82,7 +81,7 @@ int	ft_replace_and_check_valid_figure(char **mx, char ch)
 		x++;
 	}
 	if (dots != 12 || sharps != 4)
-	{	
+	{
 		ft_putendl("error");
 		exit (0);
 		return (0);

@@ -56,11 +56,22 @@ int		getarray(int fd, char ***arr, t_tetra **lists, char ch)
 	while (i < 4)
 	{
 		if (!get_next_line(fd, &((*arr)[i++])))
-		 	emergency_exit(lists);
+		{
+			// DEB;
+	 	emergency_exit(lists);}
+	// DEB;
 	}
 	if (!ft_replace_and_check_valid_figure(&arr[0][0], ch))
 		emergency_exit(lists);
+	// DEB;
 	f = get_next_line(fd, &((*arr)[i]));
+
+	if ((*arr)[i] && (ft_strcmp((*arr)[i], "")))
+		{
+		// DEB;
+		emergency_exit(lists);
+		}
+	// DEB;
 	(*arr)[i] = NULL;
 	return (f);
 }
@@ -75,13 +86,17 @@ int		getlist(int fd, t_tetra **lists, t_tetra **list, char ch)
 	char		**arr;
 
 	arr = NULL;
+	// DEB;
 	i = 0;
 	i = getarray(fd, &arr, lists, ch);
+	// DEB;
 	if (!lst_validation(arr, ch))
 		emergency_exit(lists);
+	// DEB;
 	*list = create_ell(&arr);
 	if (!wh_validation((*list)->w, (*list)->h))
 		emergency_exit(lists);
+	// DEB;
 	return (i);
 }
 
@@ -95,9 +110,16 @@ int		ft_create(int fd, t_tetra **lists)
 	char		ch;
 
 	ch = 'A';
+	//DEB;
 	while (getlist(fd, lists, &list, ch++))
+		{
+			// DEB;
 		l_back_push(lists, list);
+			// DEB;
+		}
+	// DEB;
 	l_back_push(lists, list);
+	// DEB;
 	return (0);
 }
 

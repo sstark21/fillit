@@ -29,7 +29,7 @@ void	ft_clear_mtx(char **mtx)
 	int		n;
 
 	n = 0;
-	
+
 	while (mtx[n])
 	{
 		free(mtx[n]);
@@ -39,29 +39,48 @@ void	ft_clear_mtx(char **mtx)
 	mtx = NULL;
 }
 
-int		ft_clear_lists(t_tetra **lst)
+// int		ft_clear_lists(t_tetra **lst)
+// {
+// 	if (!*lst)
+// 		return (0);
+// 	DEB;
+// 	if ((*lst)->next)
+// 		{
+// 			ft_clear_lists(&(*lst)->next);
+// 		}
+// 	ft_clear_mtx((*lst)->tetraminka);
+// 	free((*lst)->tetraminka);
+// 	(*lst)->tetraminka = NULL;
+// 	(void)(*lst)->w;
+// 	(void)(*lst)->h;
+// 	free((*lst)->next);
+// 	(*lst)->next = NULL;
+// 	free((*lst));
+// 	(*lst) = NULL;
+// 	DEB;
+// 	return (0);
+// }
+
+int			ft_clear_lists(t_tetra **lst)
 {
-	DEB;
-	if ((*lst))
-		ft_clear_lists(&(*lst)->next);
-	DEB;
-	
-	ft_clear_mtx((*lst)->tetraminka);
-	DEB;
-	free((*lst)->tetraminka);
-	(*lst)->tetraminka = NULL;
-	(void)(*lst)->w;
-	(void)(*lst)->h;
-	free((*lst)->next);
-	(*lst)->next = NULL;
-	free((*lst));
-	(*lst) = NULL;
-	return (0);
+	t_tetra	*tmp;
+
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		ft_clear_mtx((*lst)->tetraminka);
+		(*lst)->next = NULL;
+		free(*lst);
+		(*lst) = NULL;
+		(*lst) = tmp;
+	}
+	lst = NULL;
+	return 0;
 }
 
 void emergency_exit(t_tetra **lists)
 {
-	DEB;
+	// DEB;
 	ft_clear_lists(lists);
 	ft_putendl("error");
 	exit(0);
