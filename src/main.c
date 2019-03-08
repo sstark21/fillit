@@ -23,6 +23,7 @@ char	**ft_solve(char *line)
 		ft_clear_mtx(map);
 		map = ft_create_map(++sh);
 	}
+	free(lists);
 	return (map);
 }
 
@@ -46,6 +47,8 @@ int		ft_fillit(char *line)
 		printf("\n");
 		i++;
 	}
+	free(line);
+	ft_clear_mtx(map);
 	return (0);
 }
 

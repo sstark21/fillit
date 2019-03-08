@@ -58,7 +58,8 @@ int		getarray(int fd, char ***arr, t_tetra **lists, char ch)
 		if (!get_next_line(fd, &((*arr)[i++])))
 		{
 			// DEB;
-	 	emergency_exit(lists);}
+	 		emergency_exit(lists);
+		}
 	// DEB;
 	}
 	if (!ft_replace_and_check_valid_figure(&arr[0][0], ch))
@@ -67,10 +68,10 @@ int		getarray(int fd, char ***arr, t_tetra **lists, char ch)
 	f = get_next_line(fd, &((*arr)[i]));
 
 	if ((*arr)[i] && (ft_strcmp((*arr)[i], "")))
-		{
+	{
 		// DEB;
 		emergency_exit(lists);
-		}
+	}
 	// DEB;
 	(*arr)[i] = NULL;
 	return (f);
@@ -91,11 +92,19 @@ int		getlist(int fd, t_tetra **lists, t_tetra **list, char ch)
 	i = getarray(fd, &arr, lists, ch);
 	// DEB;
 	if (!lst_validation(arr, ch))
+	{
+		ft_clear_mtx(arr);
+		//ft_clear_lists(list);
 		emergency_exit(lists);
+	}
 	// DEB;
 	*list = create_ell(&arr);
 	if (!wh_validation((*list)->w, (*list)->h))
+	{
+		ft_clear_mtx(arr);
+		ft_clear_lists(list);
 		emergency_exit(lists);
+	}
 	// DEB;
 	return (i);
 }
