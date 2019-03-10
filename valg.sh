@@ -1,1 +1,0 @@
-make  && /Users/$(whoami)/goinfre/homebrew/Cellar/valgrind/HEAD-52713e2/bin/valgrind --leak-check=full ./fillit test && make clean
