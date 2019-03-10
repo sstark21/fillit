@@ -1,14 +1,23 @@
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move_up_and_left.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sstark <sstark@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/10 15:56:59 by sstark            #+#    #+#             */
+/*   Updated: 2019/03/10 16:36:22 by sstark           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/fillit.h"
+#include "../includes/libft.h"
 
 /*
 ** norme: 6 functions in the file
-** norme: 42 header not at top of the file
 */
 
-char		**move_up(char **matrix, char **tmp, int x, int y)
+char	**move_up(char **matrix, char **tmp, int x, int y)
 {
 	while (matrix[0][0] == '.' && matrix[0][1] == '.' &&
 	matrix[0][2] == '.' && matrix[0][3] == '.')
@@ -29,7 +38,7 @@ char		**move_up(char **matrix, char **tmp, int x, int y)
 	return (matrix);
 }
 
-char		**move_up_and_left(char **matrix)
+char	**move_up_and_left(char **matrix)
 {
 	int		x;
 	int		y;
@@ -56,7 +65,7 @@ char		**move_up_and_left(char **matrix)
 	return (matrix);
 }
 
-static int	ft_challelemline(char *str, char c)
+int		ft_challelemline(char *str, char c)
 {
 	while (*str)
 	{
@@ -67,7 +76,7 @@ static int	ft_challelemline(char *str, char c)
 	return (1);
 }
 
-static int	ft_challelemcolumn(char **matrix, int n, char c)
+int		ft_challelemcolumn(char **matrix, int n, char c)
 {
 	int		y;
 
@@ -79,58 +88,4 @@ static int	ft_challelemcolumn(char **matrix, int n, char c)
 		y++;
 	}
 	return (1);
-}
-
-int			ft_clear_line(char **matrix)
-{
-	int		y;
-	int		x;
-
-	y = 0;
-	while (matrix[y])
-	{
-		if (ft_challelemline(matrix[y], '.'))
-		{
-			free(matrix[y]);
-			x = y + 1;
-			while (matrix[x])
-			{
-				matrix[x - 1] = matrix[x];
-				x++;
-			}
-			matrix[x - 1] = matrix[x];
-			continue ;
-		}
-		y++;
-	}
-	return (y);
-}
-
-int			ft_clear_column(char **matrix)
-{
-	int		n;
-	int		y;
-	int		x;
-
-	n = 0;
-	while (matrix[0][n])
-	{
-		if (ft_challelemcolumn(matrix, n, '.'))
-		{
-			y = -1;
-			while (matrix[++y])
-			{
-				x = n + 1;
-				while (matrix[y][x])
-				{
-					matrix[y][x - 1] = matrix[y][x];
-					x++;
-				}
-				matrix[y][x - 1] = matrix[y][x];
-			}
-			continue;
-		}
-		n++;
-	}
-	return (n);
 }

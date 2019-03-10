@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helper.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sstark <sstark@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/10 15:56:35 by sstark            #+#    #+#             */
+/*   Updated: 2019/03/10 16:42:03 by sstark           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/fillit.h"
 #include "../includes/libft.h"
-#include <stdio.h>
 
 /*
 ** norme: 42 header not at top of the file
@@ -57,4 +68,20 @@ char	**ft_create_map(int sqr)
 	}
 	mx[x] = NULL;
 	return (mx);
+}
+
+t_tetra	*create_ell(char ***elem)
+{
+	t_tetra		*new_tetra;
+
+	if (!(new_tetra = (t_tetra*)malloc(sizeof(t_tetra))))
+	{
+		ft_putendl("error");
+		return (NULL);
+	}
+	(*new_tetra).h = ft_clear_line(*elem);
+	(*new_tetra).w = ft_clear_column(*elem);
+	(*new_tetra).tetraminka = (*elem);
+	(*new_tetra).next = NULL;
+	return (new_tetra);
 }

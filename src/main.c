@@ -1,10 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sstark <sstark@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/10 15:56:50 by sstark            #+#    #+#             */
+/*   Updated: 2019/03/10 16:48:16 by sstark           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/fillit.h"
 #include "../includes/libft.h"
-#include <stdio.h>
-
-/*
-** norme: 42 header not at top of the file
-*/
 
 char	**ft_solve(char *line)
 {
@@ -18,7 +25,7 @@ char	**ft_solve(char *line)
 	sharp = ft_n_sharps(lists);
 	sh = the_biggest_sqwr(sharp);
 	map = ft_create_map(sh);
-	while (!solution(map, lists, 0, 0, sh))
+	while (!solution(map, lists, 0, sh))
 	{
 		ft_clear_mtx(map);
 		map = ft_create_map(++sh);
@@ -41,13 +48,12 @@ int		ft_fillit(char *line)
 		j = 0;
 		while (map[i][j])
 		{
-			printf("%c", map[i][j]);
+			write(1, &map[i][j], 1);
 			j++;
 		}
-		printf("\n");
+		write(1, "\n", 1);
 		i++;
 	}
-	free(line);
 	ft_clear_mtx(map);
 	return (0);
 }

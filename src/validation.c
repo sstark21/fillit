@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sstark <sstark@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/10 15:57:49 by sstark            #+#    #+#             */
+/*   Updated: 2019/03/10 20:29:42 by sstark           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/fillit.h"
 #include "../includes/libft.h"
-#include <stdio.h>
+
 /*
-** norme: 42 header not at top of the file
 ** norme: function lst_validation has 32 lines
 ** norme: function ft_replace_and_check_valid_figure has 34 lines
 */
@@ -16,11 +27,21 @@ int	wh_validation(int x, int y)
 
 int	lst_validation(char **mx, char ch)
 {
-	int x;
-	int y;
 	int connect;
 
-	x = 0;
+	connect = lst_validation_loop(mx, ch, 0, 0);
+	if (connect == 6 || connect == 8)
+	{
+		if (ch < 'Z')
+			return (1);
+	}
+	return (0);
+}
+
+int	lst_validation_loop(char **mx, char ch, int x, int y)
+{
+	int connect;
+
 	connect = 0;
 	while (x < 4)
 	{
@@ -42,23 +63,24 @@ int	lst_validation(char **mx, char ch)
 		}
 		x++;
 	}
-	if (connect == 6 || connect == 8)
-	{
-		if (ch < 'Z')
-			return (1);
-	}
-	return (0);
+	return (connect);
 }
 
 int	ft_replace_and_check_valid_figure(char **mx, char ch)
 {
-	int	x;
-	int	y;
-	int	sharps;
-	int	dots;
+	if (cheker2000(mx, ch, 0, 0) == 0)
+	{
+		ft_putendl("error");
+		exit(0);
+	}
+	return (1);
+}
 
-	x = 0;
-	sharps = 0;
+int	cheker2000(char **mx, char ch, int x, int sharps)
+{
+	int	dots;
+	int y;
+
 	dots = 0;
 	while (x < 4)
 	{
@@ -80,11 +102,5 @@ int	ft_replace_and_check_valid_figure(char **mx, char ch)
 		}
 		x++;
 	}
-	if (dots != 12 || sharps != 4)
-	{
-		ft_putendl("error");
-		exit (0);
-		return (0);
-	}
-	return (1);
+	return ((dots != 12 || sharps != 4) == 0 ? 1 : 0);
 }

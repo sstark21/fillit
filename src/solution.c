@@ -1,9 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   solution.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sstark <sstark@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/10 15:57:30 by sstark            #+#    #+#             */
+/*   Updated: 2019/03/10 16:50:21 by sstark           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/fillit.h"
-#include <stdio.h>
 
 /*
 ** solution have 5 parameters
-** norme: 42 header not at top of the file
 */
 
 int	check_space(char **mtx, t_tetra *tetra, int x, int y)
@@ -90,8 +100,11 @@ int	dell_tetra(char **mtx, t_tetra *tetra, int x, int y)
 	return (1);
 }
 
-int	solution(char **mtx, t_tetra *tetra, int x, int y, int sqr)
+int	solution(char **mtx, t_tetra *tetra, int y, int sqr)
 {
+	int x;
+
+	x = 0;
 	if (!tetra)
 		return (1);
 	while (tetra->h + y <= sqr)
@@ -101,7 +114,7 @@ int	solution(char **mtx, t_tetra *tetra, int x, int y, int sqr)
 			if (check_space(mtx, tetra, x, y))
 			{
 				put_tetra(mtx, tetra, x, y);
-				if (solution(mtx, tetra->next, 0, 0, sqr))
+				if (solution(mtx, tetra->next, 0, sqr))
 					return (1);
 				dell_tetra(mtx, tetra, x, y);
 			}
