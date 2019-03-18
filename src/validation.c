@@ -6,17 +6,12 @@
 /*   By: sstark <sstark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 15:57:49 by sstark            #+#    #+#             */
-/*   Updated: 2019/03/10 20:29:42 by sstark           ###   ########.fr       */
+/*   Updated: 2019/03/18 20:46:14 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
 #include "../includes/libft.h"
-
-/*
-** norme: function lst_validation has 32 lines
-** norme: function ft_replace_and_check_valid_figure has 34 lines
-*/
 
 int	wh_validation(int x, int y)
 {
@@ -70,7 +65,9 @@ int	ft_replace_and_check_valid_figure(char **mx, char ch)
 {
 	if (cheker2000(mx, ch, 0, 0) == 0)
 	{
+		
 		ft_putendl("error");
+		ft_clear_mtx(mx);
 		exit(0);
 	}
 	return (1);

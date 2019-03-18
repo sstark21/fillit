@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 15:56:50 by sstark            #+#    #+#             */
-/*   Updated: 2019/03/10 16:48:16 by sstark           ###   ########.fr       */
+/*   Updated: 2019/03/18 20:23:59 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**ft_solve(char *line)
 		ft_clear_mtx(map);
 		map = ft_create_map(++sh);
 	}
-	free(lists);
+	ft_clear_lists(&lists);
 	return (map);
 }
 

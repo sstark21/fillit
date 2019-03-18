@@ -6,16 +6,12 @@
 /*   By: sstark <sstark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 15:57:16 by sstark            #+#    #+#             */
-/*   Updated: 2019/03/10 16:41:58 by sstark           ###   ########.fr       */
+/*   Updated: 2019/03/18 20:59:40 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
-#include <stdlib.h>
 
-/*
-** norme: 6 functions in the file
-*/
 
 int		l_back_push(t_tetra **start, t_tetra *data)
 {
@@ -61,6 +57,7 @@ int		getarray(int fd, char ***arr, t_tetra **lists, char ch)
 	{
 		emergency_exit(lists);
 	}
+	
 	(*arr)[i] = NULL;
 	return (f);
 }
@@ -75,7 +72,6 @@ int		getlist(int fd, t_tetra **lists, t_tetra **list, char ch)
 	char		**arr;
 
 	arr = NULL;
-	i = 0;
 	i = getarray(fd, &arr, lists, ch);
 	if (!lst_validation(arr, ch))
 	{
@@ -86,7 +82,6 @@ int		getlist(int fd, t_tetra **lists, t_tetra **list, char ch)
 	if (!wh_validation((*list)->w, (*list)->h))
 	{
 		ft_clear_mtx(arr);
-		ft_clear_lists(list);
 		emergency_exit(lists);
 	}
 	return (i);
@@ -122,6 +117,9 @@ int		ft_read(char *line, t_tetra **lists)
 	if (line && fd)
 		ft_create(fd, lists);
 	else
+	{
+		ft_clear_lists(lists);
 		ft_putendl("error");
+	}
 	return (0);
 }
