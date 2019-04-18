@@ -6,15 +6,11 @@
 /*   By: sstark <sstark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 15:57:30 by sstark            #+#    #+#             */
-/*   Updated: 2019/03/10 16:50:21 by sstark           ###   ########.fr       */
+/*   Updated: 2019/03/21 17:41:11 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
-
-/*
-** solution have 5 parameters
-*/
 
 int	check_space(char **mtx, t_tetra *tetra, int x, int y)
 {

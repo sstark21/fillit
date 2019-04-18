@@ -6,7 +6,7 @@
 #    By: sstark <sstark@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/10 15:58:01 by sstark            #+#    #+#              #
-#    Updated: 2019/03/18 16:49:12 by sstark           ###   ########.fr        #
+#    Updated: 2019/03/19 20:53:11 by sstark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ LIBFT =	libft/libft.a
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 

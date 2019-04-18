@@ -6,12 +6,11 @@
 /*   By: sstark <sstark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 15:57:16 by sstark            #+#    #+#             */
-/*   Updated: 2019/03/18 20:59:40 by sstark           ###   ########.fr       */
+/*   Updated: 2019/03/21 17:30:28 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
-
 
 int		l_back_push(t_tetra **start, t_tetra *data)
 {
@@ -54,10 +53,9 @@ int		getarray(int fd, char ***arr, t_tetra **lists, char ch)
 		emergency_exit(lists);
 	f = get_next_line(fd, &((*arr)[i]));
 	if ((*arr)[i] && (ft_strcmp((*arr)[i], "")))
-	{
 		emergency_exit(lists);
-	}
-	
+	if (f)
+		free((*arr)[i]);
 	(*arr)[i] = NULL;
 	return (f);
 }
@@ -75,13 +73,11 @@ int		getlist(int fd, t_tetra **lists, t_tetra **list, char ch)
 	i = getarray(fd, &arr, lists, ch);
 	if (!lst_validation(arr, ch))
 	{
-		ft_clear_mtx(arr);
 		emergency_exit(lists);
 	}
 	*list = create_ell(&arr);
 	if (!wh_validation((*list)->w, (*list)->h))
 	{
-		ft_clear_mtx(arr);
 		emergency_exit(lists);
 	}
 	return (i);

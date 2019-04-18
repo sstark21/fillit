@@ -6,55 +6,83 @@
 /*   By: sstark <sstark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 13:13:53 by gkoch             #+#    #+#             */
-/*   Updated: 2019/03/18 19:38:52 by sstark           ###   ########.fr       */
+/*   Updated: 2019/03/21 17:35:10 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
 
-static int	ft_set_line(char **line, char **turn)
+static int		ft_strlen_mod(char *ch)
 {
-	char	*item;
+	int				i;
 
-	if ((item = ft_strchr(*turn, '\n')))
+	i = 0;
+	while (ch[i] && ch[i] != '\n')
 	{
-		item[0] = '\0';
-		*line = ft_strdup(*turn);
-		item = ft_strdup(&item[1]);
-		free(*turn);
-		*turn = item;
-		return (1);
+		i++;
 	}
-	*line = ft_strdup(*turn);
-	free(*turn);
-	*turn = NULL;
-	return (1);
+	return (i);
 }
 
-int			get_next_line(const int fd, char **line)
+static char		*ft_cut_n_place(char **str)
 {
-	int				n;
-	char			buf[BUFF_SIZE + 1];
-	char			*item;
-	static char		*turn[259];
+	int				i;
+	char			*tmp1;
+	char			*tmp2;
 
-	if (fd < 0 || !line || read(fd, buf, 0) < 0)
+	i = ft_strlen_mod(*str);
+	tmp1 = ft_strnew(i);
+	ft_strncpy(tmp1, *str, i);
+	if (*(*str + i))
+		tmp2 = ft_strdup(*str + i + 1);
+	else
+		tmp2 = ft_strnew(0);
+	free(*str);
+	*str = tmp2;
+	return (tmp1);
+}
+
+static int		snake(char **str, int fd)
+{
+	char			s1[BUFF_SIZE + 1];
+	char			*s2;
+	int				i;
+
+	ft_bzero(s1, BUFF_SIZE + 1);
+	i = read(fd, s1, BUFF_SIZE);
+	if (i == -1)
 		return (-1);
-	if (turn[fd] == NULL)
-		turn[fd] = ft_strdup("\0");
-	while (!ft_strchr(turn[fd], '\n') && (n = read(fd, buf, BUFF_SIZE)))
+	s2 = ft_strjoin(*str, s1);
+	free(*str);
+	*str = s2;
+	return (i);
+}
+
+int				get_next_line(const int fd, char **line)
+{
+	static char		*str[1024];
+	int				i;
+
+	i = 1;
+	if (fd < 0 || fd > 1024 || !(line))
+		return (-1);
+	if (str[fd] == NULL)
 	{
-		buf[n] = '\0';
-		if (!(turn[fd]))
-			item = buf;
-		else
-			item = ft_strjoin(turn[fd], buf);
-		free(turn[fd]);
-		turn[fd] = item;
-		if (ft_strchr(turn[fd], '\n') || (n == 0))
-			break ;
+		str[fd] = ft_strnew(BUFF_SIZE);
+		if ((read(fd, str[fd], BUFF_SIZE)) == -1)
+			return (-1);
 	}
-	if (turn[fd][0] == '\0' && !n)
-		return (0);
-	return (ft_set_line(line, &turn[fd]));
+	if (!(ft_strchr(str[fd], '\n')))
+	{
+		while (!(ft_strchr(str[fd], '\n')) && i > 0)
+		{
+			i = snake(&str[fd], fd);
+		}
+		*line = ft_cut_n_place(&str[fd]);
+	}
+	else
+	{
+		*line = ft_cut_n_place(&str[fd]);
+	}
+	return (i > 0 || ft_strlen(*line) ? 1 : i);
 }

@@ -6,7 +6,7 @@
 /*   By: sstark <sstark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 15:57:49 by sstark            #+#    #+#             */
-/*   Updated: 2019/03/18 20:46:14 by sstark           ###   ########.fr       */
+/*   Updated: 2019/04/18 16:19:01 by sstark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,7 @@ int	ft_replace_and_check_valid_figure(char **mx, char ch)
 {
 	if (cheker2000(mx, ch, 0, 0) == 0)
 	{
-		
 		ft_putendl("error");
-		ft_clear_mtx(mx);
 		exit(0);
 	}
 	return (1);
